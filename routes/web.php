@@ -11,6 +11,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
+
+    Route::get('posts', \App\Http\Controllers\PostIndexController::class)->name('posts.index');
+    Route::get('posts/create', \App\Http\Controllers\PostCreateController::class)->name('posts.create');
 });
 
 require __DIR__.'/settings.php';
