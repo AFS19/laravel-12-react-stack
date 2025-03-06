@@ -14,15 +14,15 @@ class PostStoreController extends Controller
     public function __invoke(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'image' => 'required|image',
+            'title' => 'required|max:196',
+            'content' => 'required|max:255',
+            'image' => 'required|image|max:2048',
         ]);
 
         $data['slug'] = Str::slug($data['title']);
-        
+
         if ($request->hasFile('image')) {
-            $data['image'] = Storage::disk('public')->put('posts', $data['image']);
+            $data['image'] = Storage::disk('public')->put('posts', $request->file('image'));
         }
 
         $request->user()->posts()->create($data);

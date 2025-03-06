@@ -15,6 +15,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('posts', \App\Http\Controllers\PostIndexController::class)->name('posts.index');
     Route::inertia('posts/create', 'posts/create')->name('posts.create');
     Route::post('posts', \App\Http\Controllers\PostStoreController::class)->name('posts.store');
+    Route::get('posts/{post}/edit', \App\Http\Controllers\PostEditController::class)->name('posts.edit');
+    Route::put('posts/{post}', \App\Http\Controllers\PostUpdateController::class)->name('posts.update');
 });
 
 require __DIR__.'/settings.php';

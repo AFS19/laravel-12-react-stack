@@ -62,7 +62,7 @@ export default function Posts({ posts }: { posts: Post[] }) {
                                     <TableCell>{moment(post.created_at).calendar()}</TableCell>
                                     <TableCell>{moment(post.updated_at).calendar()}</TableCell>
                                     <TableCell className='text-right'>
-                                        <Link href="{route('posts.edit', post.id)}" className="text-indigo underline">
+                                        <Link href={route('posts.edit', post.id)} className="text-indigo-500 lg:hover:text-indigo-700">
                                             Edit
                                         </Link>
 
