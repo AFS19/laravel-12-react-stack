@@ -27,6 +27,6 @@ class PostStoreController extends Controller
 
         $request->user()->posts()->create($data);
 
-        return to_route('posts.index');
+        return to_route('posts.index')->with('success', 'Post created successfully.');
     }
 }

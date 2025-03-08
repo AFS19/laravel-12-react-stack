@@ -17,6 +17,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('posts', \App\Http\Controllers\PostStoreController::class)->name('posts.store');
     Route::get('posts/{post}/edit', \App\Http\Controllers\PostEditController::class)->name('posts.edit');
     Route::put('posts/{post}', \App\Http\Controllers\PostUpdateController::class)->name('posts.update');
+    Route::delete('posts/{post}', \App\Http\Controllers\PostDestroyController::class)->name('posts.destroy');
 });
 
 require __DIR__.'/settings.php';

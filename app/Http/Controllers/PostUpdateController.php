@@ -17,7 +17,7 @@ class PostUpdateController extends Controller
         $data = $request->validate([
             'title' => ['required', 'max:196'],
             'content' => ['required', 'max:255'],
-            'image' => ['required', 'image', 'max:2048'],
+            'image' => ['nullable', 'image', 'max:2048'],
         ]);
 
         $data['slug'] = Str::slug($data['title']);
@@ -30,6 +30,6 @@ class PostUpdateController extends Controller
 
         $post->update($data);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
     }
 }
