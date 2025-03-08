@@ -15,10 +15,7 @@ class PostIndexController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $post = $request->user()->posts()->get()->map(function ($post) {
-            $post->image = asset(Storage::url($post->image));
-            return $post;
-        });
+        $post = $request->user()->posts()->get();
 
         return Inertia::render('posts/index', [
             'posts' => PostResource::collection($post),

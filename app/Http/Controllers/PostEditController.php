@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,7 +15,7 @@ class PostEditController extends Controller
     public function __invoke(Post $post)
     {
         return Inertia('posts/edit', [
-            'currentPost' => $post,
+            'currentPost' => new PostResource($post),
         ]);
     }
 }

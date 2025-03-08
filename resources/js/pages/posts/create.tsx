@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 import { Textarea } from "@/components/ui/textarea"
+import { useState } from 'react';
 
 
 
@@ -25,6 +26,7 @@ type PostForm = {
 };
 
 export default function CreatePost() {
+    const [imagePreview, setImagePreview] = useState<string | null>('');
     const { data, setData, post, processing, errors } = useForm<PostForm>({
         title: '',
         content: '',
@@ -37,6 +39,7 @@ export default function CreatePost() {
             return;
         }
         setData('image', file);
+        setImagePreview(URL.createObjectURL(file));
     }
 
     const submit: FormEventHandler = (e) => {
@@ -78,6 +81,9 @@ export default function CreatePost() {
                                     autoComplete="image"
                                     onChange={handleFileChange}
                                 />
+                                {imagePreview && (
+                                    <img src={imagePreview} alt="image preview" className="w-full h-40 object-cover" />
+                                )}
                                 <InputError message={errors.image} />
                             </div>
 

@@ -22,10 +22,10 @@ export default function EditPost({ currentPost }: { currentPost: Post }) {
     const [title, setTitle] = useState<string>(currentPost.title);
     const [content, setContent] = useState<string>(currentPost.content);
     const [image, setImage] = useState<File | null>(null);
-    const [imagePreview, setImagePreview] = useState<string | null>('');
+    const [imagePreview, setImagePreview] = useState<string | null>();
     const {errors} = usePage().props;
 
-    console.log(title)
+    console.log('imagePreview: ' + imagePreview)
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -79,9 +79,13 @@ export default function EditPost({ currentPost }: { currentPost: Post }) {
                                     autoComplete="image"
                                     onChange={handleFileChange}
                                 />
-                                {imagePreview && (
-                                    <img src={imagePreview} alt="image preview" className="w-full h-40 object-cover" />
-                                )}
+                                <div className='flex items-center gap-2'>
+                                    <img src={currentPost.image} alt={currentPost.title} className={"w-10 h-10 rounded-full object-cover" + (imagePreview ?? 'opacity-30')} />
+
+                                    {imagePreview && (
+                                        <img src={imagePreview} alt="image preview" className="w-14 h-14 rounded-full object-cover" />
+                                    )}
+                                </div>
                                 <InputError message={errors.image} />
                             </div>
 
